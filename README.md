@@ -1,1 +1,2 @@
-# TE-TM-Viewer
+# TE-TM Viewer
+### Electromagnetic Field Visualization for Waveguides
