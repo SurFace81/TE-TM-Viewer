@@ -6,20 +6,7 @@ namespace TETMViewer
         {
             InitializeComponent();
 
-            YXspc.PlotTitle = "Y(X)";
-            YXspc.XLabel = "X";
-            YXspc.YLabel = "Y";
-            YXspc.RefreshPlot();
-
-            ZXspc.PlotTitle = "Z(X)";
-            ZXspc.XLabel = "X";
-            ZXspc.YLabel = "Y";
-            ZXspc.RefreshPlot();
-
-            YZspc.PlotTitle = "Y(Z)";
-            YZspc.XLabel = "Z";
-            YZspc.YLabel = "Y";
-            YZspc.RefreshPlot();
+            waveTypeCb.DataSource = new List<string>() { "TE", "TM" };
         }
 
         private void calcBtn_Click(object sender, EventArgs e)

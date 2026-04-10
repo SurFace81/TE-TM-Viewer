@@ -8,6 +8,14 @@ namespace TETMViewer
     {
         private readonly FormsPlot formsPlot = new();
 
+        private string plotTitle = string.Empty;
+        private string xLabel = string.Empty;
+        private string yLabel = string.Empty;
+        private bool showArrows = true;
+        private float lineWidth = 1.5f;
+        private float arrowLengthPx = 15;
+        private float arrowWidthPx = 8;
+
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Func<double, double, Vec2>? Field { get; set; }
@@ -20,14 +28,75 @@ namespace TETMViewer
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public StreamplotOptions Options { get; set; } = new();
 
-        public string PlotTitle { get; set; } = string.Empty;
-        public string XLabel { get; set; } = string.Empty;
-        public string YLabel { get; set; } = string.Empty;
+        public string PlotTitle
+        {
+            get => plotTitle;
+            set
+            {
+                plotTitle = value;
+                RefreshPlot();
+            }
+        }
 
-        public bool ShowArrows { get; set; } = true;
-        public float LineWidth { get; set; } = 1.5f;
-        public float ArrowLengthPx { get; set; } = 15;
-        public float ArrowWidthPx { get; set; } = 8;
+        public string XLabel
+        {
+            get => xLabel;
+            set
+            {
+                xLabel = value;
+                RefreshPlot();
+            }
+        }
+
+        public string YLabel
+        {
+            get => yLabel;
+            set
+            {
+                yLabel = value;
+                RefreshPlot();
+            }
+        }
+
+        public bool ShowArrows
+        {
+            get => showArrows;
+            set
+            {
+                showArrows = value;
+                RefreshPlot();
+            }
+        }
+
+        public float LineWidth
+        {
+            get => lineWidth;
+            set
+            {
+                lineWidth = value;
+                RefreshPlot();
+            }
+        }
+
+        public float ArrowLengthPx
+        {
+            get => arrowLengthPx;
+            set
+            {
+                arrowLengthPx = value;
+                RefreshPlot();
+            }
+        }
+
+        public float ArrowWidthPx
+        {
+            get => arrowWidthPx;
+            set
+            {
+                arrowWidthPx = value;
+                RefreshPlot();
+            }
+        }
 
         public StreamPlotControl()
         {
@@ -35,10 +104,25 @@ namespace TETMViewer
             Controls.Add(formsPlot);
         }
 
+        protected override void OnCreateControl()
+        {
+            base.OnCreateControl();
+            RefreshPlot();
+        }
+
         public void RefreshPlot()
         {
             Plot plot = formsPlot.Plot;
             plot.Clear();
+
+            plot.Title(PlotTitle);
+            plot.XLabel(XLabel);
+            plot.YLabel(YLabel);
+
+            plot.Axes.Bottom.Label.FontSize = 14;
+            plot.Axes.Left.Label.FontSize = 14;
+            plot.Axes.Bottom.TickLabelStyle.FontSize = 10;
+            plot.Axes.Left.TickLabelStyle.FontSize = 10;
 
             if (Field is null || Bounds.Width <= 0 || Bounds.Height <= 0)
             {
@@ -96,10 +180,6 @@ namespace TETMViewer
             }
 
             plot.Axes.SetLimits(Bounds.XMin, Bounds.XMax, Bounds.YMin, Bounds.YMax);
-            plot.Title(PlotTitle);
-            plot.XLabel(XLabel);
-            plot.YLabel(YLabel);
-
             formsPlot.Refresh();
         }
 
