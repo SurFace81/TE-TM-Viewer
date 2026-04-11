@@ -143,6 +143,7 @@ namespace TETMViewer
             if (intensityRange < 1e-12)
                 intensityRange = 1;
 
+            var cmap = new ScottPlot.Colormaps.Plasma();
             for (int lineIndex = 0; lineIndex < lines.Count; lineIndex++)
             {
                 Streamline line = lines[lineIndex];
@@ -152,11 +153,12 @@ namespace TETMViewer
 
                 double intensity = lineIntensities[lineIndex];
                 double t = (intensity - minIntensity) / intensityRange;
-                System.Drawing.Color lineColor = SampleColormap(t);
+
+                ScottPlot.Color lineColor = cmap.GetColor(t);
 
                 var sp = plot.Add.ScatterLine(xs, ys);
                 sp.LineWidth = LineWidth;
-                sp.Color = ScottPlot.Color.FromColor(lineColor);
+                sp.Color = lineColor;
 
                 if (ShowArrows && line.Points.Count >= 3)
                 {
@@ -183,13 +185,18 @@ namespace TETMViewer
             formsPlot.Refresh();
         }
 
+        public void Clear()
+        {
+            formsPlot.Plot.Clear();
+        }
+
         private static void AddTriangleMarker(
             Plot plot,
             Vec2 center,
             Vec2 direction,
             float lengthPx,
             float widthPx,
-            System.Drawing.Color fillColor,
+            ScottPlot.Color fillColor,
             RectD bounds,
             Size clientSize)
         {
@@ -229,50 +236,9 @@ namespace TETMViewer
             double[] ys = { tip.Y, left.Y, right.Y };
 
             var poly = plot.Add.Polygon(xs, ys);
-            poly.FillColor = ScottPlot.Color.FromColor(fillColor);
-            poly.LineColor = ScottPlot.Color.FromColor(fillColor);
+            poly.FillColor = fillColor;
+            poly.LineColor = fillColor;
             poly.LineWidth = 1;
-        }
-
-        private static double Clamp01(double x)
-        {
-            if (x < 0) return 0;
-            if (x > 1) return 1;
-            return x;
-        }
-
-        private static System.Drawing.Color LerpColor(System.Drawing.Color a, System.Drawing.Color b, double t)
-        {
-            t = Clamp01(t);
-
-            int r = (int)Math.Round(a.R + (b.R - a.R) * t);
-            int g = (int)Math.Round(a.G + (b.G - a.G) * t);
-            int bb = (int)Math.Round(a.B + (b.B - a.B) * t);
-
-            return System.Drawing.Color.FromArgb(r, g, bb);
-        }
-
-        private static System.Drawing.Color SampleColormap(double t)
-        {
-            t = Clamp01(t);
-
-            System.Drawing.Color[] palette =
-            {
-                System.Drawing.Color.FromArgb(68, 1, 84),
-                System.Drawing.Color.FromArgb(59, 82, 139),
-                System.Drawing.Color.FromArgb(33, 145, 140),
-                System.Drawing.Color.FromArgb(94, 201, 98),
-                System.Drawing.Color.FromArgb(253, 231, 37),
-            };
-
-            double scaled = t * (palette.Length - 1);
-            int i = (int)Math.Floor(scaled);
-
-            if (i >= palette.Length - 1)
-                return palette[^1];
-
-            double frac = scaled - i;
-            return LerpColor(palette[i], palette[i + 1], frac);
         }
 
         private static double ComputeLineIntensity(Streamline line, Func<double, double, Vec2> field)
