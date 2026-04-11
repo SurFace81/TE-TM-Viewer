@@ -31,15 +31,22 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form));
             splitContainer = new SplitContainer();
             groupBox3 = new GroupBox();
+            useTimeSimulCheckBox = new CheckBox();
             label10 = new Label();
-            numericTextBox5 = new TETMViewer.UI.NumericTextBox();
+            stepTimeTextBox = new TETMViewer.UI.NumericTextBox();
             label9 = new Label();
-            numericTextBox4 = new TETMViewer.UI.NumericTextBox();
-            numericTextBox3 = new TETMViewer.UI.NumericTextBox();
+            endTimeTextBox = new TETMViewer.UI.NumericTextBox();
+            startTimeTextBox = new TETMViewer.UI.NumericTextBox();
             label8 = new Label();
             groupBox2 = new GroupBox();
-            numericTextBox2 = new TETMViewer.UI.NumericTextBox();
-            numericTextBox1 = new TETMViewer.UI.NumericTextBox();
+            crWaveFreqTextBox = new TextBox();
+            label13 = new Label();
+            label14 = new Label();
+            label12 = new Label();
+            waveFreqTextBox = new TETMViewer.UI.NumericTextBox();
+            label11 = new Label();
+            ampETextBox = new TETMViewer.UI.NumericTextBox();
+            ampHTextBox = new TETMViewer.UI.NumericTextBox();
             label6 = new Label();
             label7 = new Label();
             label1 = new Label();
@@ -103,77 +110,88 @@
             // 
             // groupBox3
             // 
+            groupBox3.Controls.Add(useTimeSimulCheckBox);
             groupBox3.Controls.Add(label10);
-            groupBox3.Controls.Add(numericTextBox5);
+            groupBox3.Controls.Add(stepTimeTextBox);
             groupBox3.Controls.Add(label9);
-            groupBox3.Controls.Add(numericTextBox4);
-            groupBox3.Controls.Add(numericTextBox3);
+            groupBox3.Controls.Add(endTimeTextBox);
+            groupBox3.Controls.Add(startTimeTextBox);
             groupBox3.Controls.Add(label8);
-            groupBox3.Location = new Point(3, 428);
+            groupBox3.Location = new Point(3, 488);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(311, 81);
+            groupBox3.Size = new Size(311, 106);
             groupBox3.TabIndex = 14;
             groupBox3.TabStop = false;
             groupBox3.Text = "Время";
             // 
+            // useTimeSimulCheckBox
+            // 
+            useTimeSimulCheckBox.AutoSize = true;
+            useTimeSimulCheckBox.Location = new Point(8, 21);
+            useTimeSimulCheckBox.Name = "useTimeSimulCheckBox";
+            useTimeSimulCheckBox.Size = new Size(174, 22);
+            useTimeSimulCheckBox.TabIndex = 17;
+            useTimeSimulCheckBox.Text = "Использовать время";
+            useTimeSimulCheckBox.UseVisualStyleBackColor = true;
+            // 
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(139, 21);
+            label10.Location = new Point(142, 46);
             label10.Name = "label10";
             label10.Size = new Size(16, 18);
             label10.TabIndex = 16;
             label10.Text = "-";
             // 
-            // numericTextBox5
+            // stepTimeTextBox
             // 
-            numericTextBox5.CheckIfEmpty = false;
-            numericTextBox5.Location = new Point(52, 49);
-            numericTextBox5.MaxLength = 5;
-            numericTextBox5.Name = "numericTextBox5";
-            numericTextBox5.Size = new Size(69, 25);
-            numericTextBox5.TabIndex = 15;
-            numericTextBox5.Text = "0.01";
-            numericTextBox5.TextAlign = HorizontalAlignment.Center;
-            numericTextBox5.ValueType = UI.NumericTextBox.NumericType.Double;
+            stepTimeTextBox.CheckIfEmpty = false;
+            stepTimeTextBox.Location = new Point(55, 74);
+            stepTimeTextBox.MaxLength = 5;
+            stepTimeTextBox.Name = "stepTimeTextBox";
+            stepTimeTextBox.Size = new Size(69, 25);
+            stepTimeTextBox.TabIndex = 15;
+            stepTimeTextBox.Text = "0,01";
+            stepTimeTextBox.TextAlign = HorizontalAlignment.Center;
+            stepTimeTextBox.ValueType = UI.NumericTextBox.NumericType.Double;
             // 
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(6, 50);
+            label9.Location = new Point(9, 75);
             label9.Name = "label9";
             label9.Size = new Size(40, 18);
             label9.TabIndex = 14;
             label9.Text = "Шаг:";
             // 
-            // numericTextBox4
+            // endTimeTextBox
             // 
-            numericTextBox4.CheckIfEmpty = false;
-            numericTextBox4.Location = new Point(182, 18);
-            numericTextBox4.MaxLength = 5;
-            numericTextBox4.Name = "numericTextBox4";
-            numericTextBox4.Size = new Size(69, 25);
-            numericTextBox4.TabIndex = 13;
-            numericTextBox4.Text = "1";
-            numericTextBox4.TextAlign = HorizontalAlignment.Center;
-            numericTextBox4.ValueType = UI.NumericTextBox.NumericType.Double;
+            endTimeTextBox.CheckIfEmpty = false;
+            endTimeTextBox.Location = new Point(185, 43);
+            endTimeTextBox.MaxLength = 5;
+            endTimeTextBox.Name = "endTimeTextBox";
+            endTimeTextBox.Size = new Size(69, 25);
+            endTimeTextBox.TabIndex = 13;
+            endTimeTextBox.Text = "1";
+            endTimeTextBox.TextAlign = HorizontalAlignment.Center;
+            endTimeTextBox.ValueType = UI.NumericTextBox.NumericType.Double;
             // 
-            // numericTextBox3
+            // startTimeTextBox
             // 
-            numericTextBox3.CheckIfEmpty = false;
-            numericTextBox3.Location = new Point(52, 18);
-            numericTextBox3.MaxLength = 5;
-            numericTextBox3.Name = "numericTextBox3";
-            numericTextBox3.Size = new Size(69, 25);
-            numericTextBox3.TabIndex = 12;
-            numericTextBox3.Text = "0";
-            numericTextBox3.TextAlign = HorizontalAlignment.Center;
-            numericTextBox3.ValueType = UI.NumericTextBox.NumericType.Double;
+            startTimeTextBox.CheckIfEmpty = false;
+            startTimeTextBox.Location = new Point(55, 43);
+            startTimeTextBox.MaxLength = 5;
+            startTimeTextBox.Name = "startTimeTextBox";
+            startTimeTextBox.Size = new Size(69, 25);
+            startTimeTextBox.TabIndex = 12;
+            startTimeTextBox.Text = "0";
+            startTimeTextBox.TextAlign = HorizontalAlignment.Center;
+            startTimeTextBox.ValueType = UI.NumericTextBox.NumericType.Double;
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(6, 21);
+            label8.Location = new Point(9, 46);
             label8.Name = "label8";
             label8.Size = new Size(40, 18);
             label8.TabIndex = 12;
@@ -181,8 +199,14 @@
             // 
             // groupBox2
             // 
-            groupBox2.Controls.Add(numericTextBox2);
-            groupBox2.Controls.Add(numericTextBox1);
+            groupBox2.Controls.Add(crWaveFreqTextBox);
+            groupBox2.Controls.Add(label13);
+            groupBox2.Controls.Add(label14);
+            groupBox2.Controls.Add(label12);
+            groupBox2.Controls.Add(waveFreqTextBox);
+            groupBox2.Controls.Add(label11);
+            groupBox2.Controls.Add(ampETextBox);
+            groupBox2.Controls.Add(ampHTextBox);
             groupBox2.Controls.Add(label6);
             groupBox2.Controls.Add(label7);
             groupBox2.Controls.Add(label1);
@@ -193,39 +217,96 @@
             groupBox2.Controls.Add(numMTextBox);
             groupBox2.Location = new Point(3, 297);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(311, 125);
+            groupBox2.Size = new Size(311, 185);
             groupBox2.TabIndex = 13;
             groupBox2.TabStop = false;
             groupBox2.Text = "Параметры волны";
             // 
-            // numericTextBox2
+            // crWaveFreqTextBox
             // 
-            numericTextBox2.CheckIfEmpty = false;
-            numericTextBox2.Location = new Point(55, 86);
-            numericTextBox2.MaxLength = 5;
-            numericTextBox2.Name = "numericTextBox2";
-            numericTextBox2.Size = new Size(69, 25);
-            numericTextBox2.TabIndex = 9;
-            numericTextBox2.Text = "1";
-            numericTextBox2.TextAlign = HorizontalAlignment.Center;
-            numericTextBox2.ValueType = UI.NumericTextBox.NumericType.Double;
+            crWaveFreqTextBox.Location = new Point(102, 150);
+            crWaveFreqTextBox.Name = "crWaveFreqTextBox";
+            crWaveFreqTextBox.ReadOnly = true;
+            crWaveFreqTextBox.Size = new Size(151, 25);
+            crWaveFreqTextBox.TabIndex = 15;
+            crWaveFreqTextBox.TextAlign = HorizontalAlignment.Center;
             // 
-            // numericTextBox1
+            // label13
             // 
-            numericTextBox1.CheckIfEmpty = false;
-            numericTextBox1.Location = new Point(185, 86);
-            numericTextBox1.MaxLength = 5;
-            numericTextBox1.Name = "numericTextBox1";
-            numericTextBox1.Size = new Size(69, 25);
-            numericTextBox1.TabIndex = 11;
-            numericTextBox1.Text = "1";
-            numericTextBox1.TextAlign = HorizontalAlignment.Center;
-            numericTextBox1.ValueType = UI.NumericTextBox.NumericType.Double;
+            label13.AutoSize = true;
+            label13.Location = new Point(259, 153);
+            label13.Name = "label13";
+            label13.Size = new Size(32, 18);
+            label13.TabIndex = 17;
+            label13.Text = "МГц";
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Location = new Point(7, 153);
+            label14.Name = "label14";
+            label14.Size = new Size(96, 18);
+            label14.TabIndex = 15;
+            label14.Text = "Кр. частота";
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new Point(259, 124);
+            label12.Name = "label12";
+            label12.Size = new Size(32, 18);
+            label12.TabIndex = 14;
+            label12.Text = "МГц";
+            // 
+            // waveFreqTextBox
+            // 
+            waveFreqTextBox.CheckIfEmpty = false;
+            waveFreqTextBox.Location = new Point(102, 121);
+            waveFreqTextBox.MaxLength = 8;
+            waveFreqTextBox.Name = "waveFreqTextBox";
+            waveFreqTextBox.Size = new Size(151, 25);
+            waveFreqTextBox.TabIndex = 13;
+            waveFreqTextBox.Text = "10000";
+            waveFreqTextBox.TextAlign = HorizontalAlignment.Center;
+            waveFreqTextBox.ValueType = UI.NumericTextBox.NumericType.Double;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new Point(6, 124);
+            label11.Name = "label11";
+            label11.Size = new Size(64, 18);
+            label11.TabIndex = 12;
+            label11.Text = "Частота";
+            // 
+            // ampETextBox
+            // 
+            ampETextBox.CheckIfEmpty = false;
+            ampETextBox.Location = new Point(55, 86);
+            ampETextBox.MaxLength = 5;
+            ampETextBox.Name = "ampETextBox";
+            ampETextBox.Size = new Size(69, 25);
+            ampETextBox.TabIndex = 9;
+            ampETextBox.Text = "1";
+            ampETextBox.TextAlign = HorizontalAlignment.Center;
+            ampETextBox.ValueType = UI.NumericTextBox.NumericType.Double;
+            // 
+            // ampHTextBox
+            // 
+            ampHTextBox.CheckIfEmpty = false;
+            ampHTextBox.Location = new Point(185, 86);
+            ampHTextBox.MaxLength = 5;
+            ampHTextBox.Name = "ampHTextBox";
+            ampHTextBox.Size = new Size(69, 25);
+            ampHTextBox.TabIndex = 11;
+            ampHTextBox.Text = "1";
+            ampHTextBox.TextAlign = HorizontalAlignment.Center;
+            ampHTextBox.ValueType = UI.NumericTextBox.NumericType.Double;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(9, 89);
+            label6.Location = new Point(6, 89);
             label6.Name = "label6";
             label6.Size = new Size(56, 18);
             label6.TabIndex = 8;
@@ -269,11 +350,12 @@
             numNTextBox.Text = "0";
             numNTextBox.TextAlign = HorizontalAlignment.Center;
             numNTextBox.ValueType = UI.NumericTextBox.NumericType.Int;
+            numNTextBox.TextChanged += numABMNTextBox_TextChanged;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(8, 53);
+            label2.Location = new Point(6, 53);
             label2.Name = "label2";
             label2.Size = new Size(40, 18);
             label2.TabIndex = 4;
@@ -299,6 +381,7 @@
             numMTextBox.Text = "1";
             numMTextBox.TextAlign = HorizontalAlignment.Center;
             numMTextBox.ValueType = UI.NumericTextBox.NumericType.Int;
+            numMTextBox.TextChanged += numABMNTextBox_TextChanged;
             // 
             // groupBox1
             // 
@@ -330,9 +413,10 @@
             numBTextBox.Name = "numBTextBox";
             numBTextBox.Size = new Size(69, 25);
             numBTextBox.TabIndex = 11;
-            numBTextBox.Text = "0.5";
+            numBTextBox.Text = "1";
             numBTextBox.TextAlign = HorizontalAlignment.Center;
             numBTextBox.ValueType = UI.NumericTextBox.NumericType.Double;
+            numBTextBox.TextChanged += numABMNTextBox_TextChanged;
             // 
             // numATextBox
             // 
@@ -342,9 +426,10 @@
             numATextBox.Name = "numATextBox";
             numATextBox.Size = new Size(69, 25);
             numATextBox.TabIndex = 9;
-            numATextBox.Text = "1";
+            numATextBox.Text = "2,3";
             numATextBox.TextAlign = HorizontalAlignment.Center;
             numATextBox.ValueType = UI.NumericTextBox.NumericType.Double;
+            numATextBox.TextChanged += numABMNTextBox_TextChanged;
             // 
             // label5
             // 
@@ -368,7 +453,7 @@
             // 
             // calcBtn
             // 
-            calcBtn.Location = new Point(55, 515);
+            calcBtn.Location = new Point(57, 600);
             calcBtn.Name = "calcBtn";
             calcBtn.Size = new Size(199, 32);
             calcBtn.TabIndex = 0;
@@ -509,14 +594,14 @@
         private Label label4;
         private GroupBox groupBox3;
         private Label label10;
-        private UI.NumericTextBox numericTextBox5;
+        private UI.NumericTextBox stepTimeTextBox;
         private Label label9;
-        private UI.NumericTextBox numericTextBox4;
-        private UI.NumericTextBox numericTextBox3;
+        private UI.NumericTextBox endTimeTextBox;
+        private UI.NumericTextBox startTimeTextBox;
         private Label label8;
         private GroupBox groupBox2;
-        private UI.NumericTextBox numericTextBox2;
-        private UI.NumericTextBox numericTextBox1;
+        private UI.NumericTextBox ampETextBox;
+        private UI.NumericTextBox ampHTextBox;
         private Label label6;
         private Label label7;
         private SplitContainer splitContainer1;
@@ -525,5 +610,12 @@
         private StreamPlotControl ZXspc;
         private StreamPlotControl YXspc;
         private StreamPlotControl YZspc;
+        private Label label12;
+        private UI.NumericTextBox waveFreqTextBox;
+        private Label label11;
+        private Label label13;
+        private Label label14;
+        private TextBox crWaveFreqTextBox;
+        private CheckBox useTimeSimulCheckBox;
     }
 }

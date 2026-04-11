@@ -38,13 +38,13 @@ namespace TETMViewer.UI
 
         private void NumericTextBox_KeyPress(object? sender, KeyPressEventArgs e)
         {
-            if (ValueType == NumericType.Int && e.KeyChar == '.')
+            if (ValueType == NumericType.Int && e.KeyChar == ',')
             {
                 e.Handled = true;
                 return;
             }
 
-            e.Handled = !(char.IsDigit(e.KeyChar) || char.IsControl(e.KeyChar) || e.KeyChar == '.');
+            e.Handled = !(char.IsDigit(e.KeyChar) || char.IsControl(e.KeyChar) || e.KeyChar == ',');
         }
 
         private bool TryValidate(string text)
@@ -52,10 +52,10 @@ namespace TETMViewer.UI
             switch (ValueType)
             {
                 case NumericType.Int:
-                    return int.TryParse(text, NumberStyles.Integer, CultureInfo.InvariantCulture, out _);
+                    return int.TryParse(text, out _);
 
                 case NumericType.Double:
-                    return double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out _);
+                    return double.TryParse(text, out _);
 
                 default:
                     return false;
