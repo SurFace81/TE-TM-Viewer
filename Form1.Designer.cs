@@ -58,7 +58,7 @@
             splitContainer1 = new SplitContainer();
             splitContainer2 = new SplitContainer();
             YXspc = new StreamPlotControl();
-            this.YZspc = new StreamPlotControl();
+            YZspc = new StreamPlotControl();
             ZXspc = new StreamPlotControl();
             ((System.ComponentModel.ISupportInitialize)splitContainer).BeginInit();
             splitContainer.Panel1.SuspendLayout();
@@ -406,7 +406,7 @@
             // 
             // splitContainer2.Panel2
             // 
-            splitContainer2.Panel2.Controls.Add(this.YZspc);
+            splitContainer2.Panel2.Controls.Add(YZspc);
             splitContainer2.Size = new Size(563, 746);
             splitContainer2.SplitterDistance = 368;
             splitContainer2.TabIndex = 0;
@@ -416,37 +416,37 @@
             YXspc.ArrowLengthPx = 8F;
             YXspc.ArrowWidthPx = 8F;
             YXspc.Dock = DockStyle.Fill;
-            YXspc.LineWidth = 1.5F;
+            YXspc.LineWidth = 2F;
             YXspc.Location = new Point(0, 0);
             YXspc.Name = "YXspc";
             YXspc.PlotTitle = "Y(X)";
             YXspc.ShowArrows = true;
             YXspc.Size = new Size(563, 368);
-            YXspc.TabIndex = 0;
+            YXspc.TabIndex = 1;
             YXspc.XLabel = "X";
             YXspc.YLabel = "Y";
             // 
             // YZspc
             // 
-            this.YZspc.ArrowLengthPx = 8F;
-            this.YZspc.ArrowWidthPx = 8F;
-            this.YZspc.Dock = DockStyle.Fill;
-            this.YZspc.LineWidth = 1.5F;
-            this.YZspc.Location = new Point(0, 0);
-            this.YZspc.Name = "YZspc";
-            this.YZspc.PlotTitle = "Y(Z)";
-            this.YZspc.ShowArrows = true;
-            this.YZspc.Size = new Size(563, 374);
-            this.YZspc.TabIndex = 0;
-            this.YZspc.XLabel = "Z";
-            this.YZspc.YLabel = "Y";
+            YZspc.ArrowLengthPx = 8F;
+            YZspc.ArrowWidthPx = 8F;
+            YZspc.Dock = DockStyle.Fill;
+            YZspc.LineWidth = 2F;
+            YZspc.Location = new Point(0, 0);
+            YZspc.Name = "YZspc";
+            YZspc.PlotTitle = "Y(Z)";
+            YZspc.ShowArrows = true;
+            YZspc.Size = new Size(563, 374);
+            YZspc.TabIndex = 1;
+            YZspc.XLabel = "Z";
+            YZspc.YLabel = "Y";
             // 
             // ZXspc
             // 
             ZXspc.ArrowLengthPx = 8F;
             ZXspc.ArrowWidthPx = 8F;
             ZXspc.Dock = DockStyle.Fill;
-            ZXspc.LineWidth = 1.5F;
+            ZXspc.LineWidth = 2F;
             ZXspc.Location = new Point(0, 0);
             ZXspc.Name = "ZXspc";
             ZXspc.PlotTitle = "Z(X)";
@@ -521,8 +521,9 @@
         private Label label7;
         private SplitContainer splitContainer1;
         private SplitContainer splitContainer2;
-        private StreamPlotControl YXspc;
         private StreamPlotControl streamPlotControl4;
         private StreamPlotControl ZXspc;
+        private StreamPlotControl YXspc;
+        private StreamPlotControl YZspc;
     }
 }
