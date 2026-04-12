@@ -32,16 +32,16 @@
 
     public sealed class StreamplotOptions
     {
-        public int SeedColumns { get; init; } = 28;
-        public int SeedRows { get; init; } = 20;
+        public int SeedColumns { get; init; } = 40;
+        public int SeedRows { get; init; } = 40;
 
-        public int OccupancyColumns { get; init; } = 70;
-        public int OccupancyRows { get; init; } = 50;
+        public int OccupancyColumns { get; init; } = 60;
+        public int OccupancyRows { get; init; } = 60;
 
-        public double StepSize { get; init; } = 0.06;
-        public int MaxStepsPerDirection { get; init; } = 450;
+        public double StepSize { get; init; } = 0.0003;
+        public int MaxStepsPerDirection { get; init; } = 4000;
         public double MinSpeed { get; init; } = 1e-4;
-        public double MinLength { get; init; } = 0.35;
+        public double MinLength { get; init; } = 0.0015;
 
         public bool NormalizeField { get; init; } = true;
         public bool Bidirectional { get; init; } = true;

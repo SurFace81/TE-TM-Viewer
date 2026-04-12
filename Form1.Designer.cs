@@ -30,14 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form));
             splitContainer = new SplitContainer();
-            groupBox3 = new GroupBox();
-            useTimeSimulCheckBox = new CheckBox();
-            label10 = new Label();
+            timeGroupBox = new GroupBox();
+            stopBtn = new Button();
+            startBtn = new Button();
             stepTimeTextBox = new TETMViewer.UI.NumericTextBox();
             label9 = new Label();
-            endTimeTextBox = new TETMViewer.UI.NumericTextBox();
-            startTimeTextBox = new TETMViewer.UI.NumericTextBox();
-            label8 = new Label();
+            useTimeSimulCheckBox = new CheckBox();
             groupBox2 = new GroupBox();
             crWaveFreqTextBox = new TextBox();
             label13 = new Label();
@@ -71,7 +69,7 @@
             splitContainer.Panel1.SuspendLayout();
             splitContainer.Panel2.SuspendLayout();
             splitContainer.SuspendLayout();
-            groupBox3.SuspendLayout();
+            timeGroupBox.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox).BeginInit();
@@ -95,7 +93,8 @@
             // 
             // splitContainer.Panel1
             // 
-            splitContainer.Panel1.Controls.Add(groupBox3);
+            splitContainer.Panel1.Controls.Add(timeGroupBox);
+            splitContainer.Panel1.Controls.Add(useTimeSimulCheckBox);
             splitContainer.Panel1.Controls.Add(groupBox2);
             splitContainer.Panel1.Controls.Add(groupBox1);
             splitContainer.Panel1.Controls.Add(pictureBox);
@@ -108,45 +107,45 @@
             splitContainer.SplitterDistance = 314;
             splitContainer.TabIndex = 1;
             // 
-            // groupBox3
+            // timeGroupBox
             // 
-            groupBox3.Controls.Add(useTimeSimulCheckBox);
-            groupBox3.Controls.Add(label10);
-            groupBox3.Controls.Add(stepTimeTextBox);
-            groupBox3.Controls.Add(label9);
-            groupBox3.Controls.Add(endTimeTextBox);
-            groupBox3.Controls.Add(startTimeTextBox);
-            groupBox3.Controls.Add(label8);
-            groupBox3.Location = new Point(3, 488);
-            groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(311, 106);
-            groupBox3.TabIndex = 14;
-            groupBox3.TabStop = false;
-            groupBox3.Text = "Время";
+            timeGroupBox.Controls.Add(stopBtn);
+            timeGroupBox.Controls.Add(startBtn);
+            timeGroupBox.Controls.Add(stepTimeTextBox);
+            timeGroupBox.Controls.Add(label9);
+            timeGroupBox.Location = new Point(3, 516);
+            timeGroupBox.Name = "timeGroupBox";
+            timeGroupBox.Size = new Size(311, 85);
+            timeGroupBox.TabIndex = 14;
+            timeGroupBox.TabStop = false;
+            timeGroupBox.Text = "Время";
+            timeGroupBox.Visible = false;
             // 
-            // useTimeSimulCheckBox
+            // stopBtn
             // 
-            useTimeSimulCheckBox.AutoSize = true;
-            useTimeSimulCheckBox.Location = new Point(8, 21);
-            useTimeSimulCheckBox.Name = "useTimeSimulCheckBox";
-            useTimeSimulCheckBox.Size = new Size(174, 22);
-            useTimeSimulCheckBox.TabIndex = 17;
-            useTimeSimulCheckBox.Text = "Использовать время";
-            useTimeSimulCheckBox.UseVisualStyleBackColor = true;
+            stopBtn.Enabled = false;
+            stopBtn.Location = new Point(139, 51);
+            stopBtn.Name = "stopBtn";
+            stopBtn.Size = new Size(115, 29);
+            stopBtn.TabIndex = 19;
+            stopBtn.Text = "Stop";
+            stopBtn.UseVisualStyleBackColor = true;
+            stopBtn.Click += stopBtn_Click;
             // 
-            // label10
+            // startBtn
             // 
-            label10.AutoSize = true;
-            label10.Location = new Point(142, 46);
-            label10.Name = "label10";
-            label10.Size = new Size(16, 18);
-            label10.TabIndex = 16;
-            label10.Text = "-";
+            startBtn.Location = new Point(6, 51);
+            startBtn.Name = "startBtn";
+            startBtn.Size = new Size(118, 29);
+            startBtn.TabIndex = 18;
+            startBtn.Text = "Start";
+            startBtn.UseVisualStyleBackColor = true;
+            startBtn.Click += startBtn_Click;
             // 
             // stepTimeTextBox
             // 
             stepTimeTextBox.CheckIfEmpty = false;
-            stepTimeTextBox.Location = new Point(55, 74);
+            stepTimeTextBox.Location = new Point(55, 20);
             stepTimeTextBox.MaxLength = 5;
             stepTimeTextBox.Name = "stepTimeTextBox";
             stepTimeTextBox.Size = new Size(69, 25);
@@ -158,44 +157,22 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(9, 75);
+            label9.Location = new Point(9, 21);
             label9.Name = "label9";
             label9.Size = new Size(40, 18);
             label9.TabIndex = 14;
             label9.Text = "Шаг:";
             // 
-            // endTimeTextBox
+            // useTimeSimulCheckBox
             // 
-            endTimeTextBox.CheckIfEmpty = false;
-            endTimeTextBox.Location = new Point(185, 43);
-            endTimeTextBox.MaxLength = 5;
-            endTimeTextBox.Name = "endTimeTextBox";
-            endTimeTextBox.Size = new Size(69, 25);
-            endTimeTextBox.TabIndex = 13;
-            endTimeTextBox.Text = "1";
-            endTimeTextBox.TextAlign = HorizontalAlignment.Center;
-            endTimeTextBox.ValueType = UI.NumericTextBox.NumericType.Double;
-            // 
-            // startTimeTextBox
-            // 
-            startTimeTextBox.CheckIfEmpty = false;
-            startTimeTextBox.Location = new Point(55, 43);
-            startTimeTextBox.MaxLength = 5;
-            startTimeTextBox.Name = "startTimeTextBox";
-            startTimeTextBox.Size = new Size(69, 25);
-            startTimeTextBox.TabIndex = 12;
-            startTimeTextBox.Text = "0";
-            startTimeTextBox.TextAlign = HorizontalAlignment.Center;
-            startTimeTextBox.ValueType = UI.NumericTextBox.NumericType.Double;
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Location = new Point(9, 46);
-            label8.Name = "label8";
-            label8.Size = new Size(40, 18);
-            label8.TabIndex = 12;
-            label8.Text = "t = ";
+            useTimeSimulCheckBox.AutoSize = true;
+            useTimeSimulCheckBox.Location = new Point(9, 488);
+            useTimeSimulCheckBox.Name = "useTimeSimulCheckBox";
+            useTimeSimulCheckBox.Size = new Size(174, 22);
+            useTimeSimulCheckBox.TabIndex = 17;
+            useTimeSimulCheckBox.Text = "Использовать время";
+            useTimeSimulCheckBox.UseVisualStyleBackColor = true;
+            useTimeSimulCheckBox.CheckedChanged += useTimeSimulCheckBox_CheckedChanged;
             // 
             // groupBox2
             // 
@@ -453,9 +430,9 @@
             // 
             // calcBtn
             // 
-            calcBtn.Location = new Point(57, 600);
+            calcBtn.Location = new Point(9, 602);
             calcBtn.Name = "calcBtn";
-            calcBtn.Size = new Size(199, 32);
+            calcBtn.Size = new Size(302, 32);
             calcBtn.TabIndex = 0;
             calcBtn.Text = "Построить";
             calcBtn.UseVisualStyleBackColor = true;
@@ -553,11 +530,12 @@
             Name = "Form";
             Text = "TE-TM Viewer";
             splitContainer.Panel1.ResumeLayout(false);
+            splitContainer.Panel1.PerformLayout();
             splitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer).EndInit();
             splitContainer.ResumeLayout(false);
-            groupBox3.ResumeLayout(false);
-            groupBox3.PerformLayout();
+            timeGroupBox.ResumeLayout(false);
+            timeGroupBox.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             groupBox1.ResumeLayout(false);
@@ -592,13 +570,9 @@
         private Label label5;
         private UI.NumericTextBox numATextBox;
         private Label label4;
-        private GroupBox groupBox3;
-        private Label label10;
+        private GroupBox timeGroupBox;
         private UI.NumericTextBox stepTimeTextBox;
         private Label label9;
-        private UI.NumericTextBox endTimeTextBox;
-        private UI.NumericTextBox startTimeTextBox;
-        private Label label8;
         private GroupBox groupBox2;
         private UI.NumericTextBox ampETextBox;
         private UI.NumericTextBox ampHTextBox;
@@ -617,5 +591,7 @@
         private Label label14;
         private TextBox crWaveFreqTextBox;
         private CheckBox useTimeSimulCheckBox;
+        private Button stopBtn;
+        private Button startBtn;
     }
 }

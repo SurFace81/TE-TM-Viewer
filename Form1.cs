@@ -29,6 +29,11 @@ namespace TETMViewer
 
         private void calcBtn_Click(object sender, EventArgs e)
         {
+            Calculate();
+        }
+
+        private void Calculate()
+        {
             a = double.Parse(numATextBox.Text) * 1e-2;
             b = double.Parse(numBTextBox.Text) * 1e-2;
             m = int.Parse(numMTextBox.Text);
@@ -64,12 +69,18 @@ namespace TETMViewer
                 return;
             }
 
+            if (useTimeSimulCheckBox.Checked)
+            {
+                phase += double.Parse(stepTimeTextBox.Text);
+            }
             t = phase / omega;
 
-            zMax = 2 * Math.PI / beta;
+            //zMax = 2 * Math.PI / beta;
+            zMax = 0.05;
             x0 = a / 1.8;
             y0 = b / 1.8;
-            z0 = (phase + Math.PI / 2) / beta;
+            //z0 = (phase + Math.PI / 2) / beta;
+            z0 = 0.05;
 
             if (waveTypeCb.SelectedIndex == (int)WAVE_TYPES.TE)
             {
@@ -109,12 +120,12 @@ namespace TETMViewer
             YXspc.Options = new StreamplotOptions
             {
                 SeedColumns = 40,
-                SeedRows = 20,
-                OccupancyColumns = 100,
-                OccupancyRows = 50,
+                SeedRows = 40,
+                OccupancyColumns = 60,
+                OccupancyRows = 60,
                 StepSize = 0.0002,
                 MaxStepsPerDirection = 3000,
-                MinLength = 0.001,
+                MinLength = 0.0015,
                 NormalizeField = true
             };
 
@@ -135,9 +146,9 @@ namespace TETMViewer
             ZXspc.PlotTitle = $"Z(X), E, y0 = {y0:F4}";
             ZXspc.Options = new StreamplotOptions
             {
-                SeedColumns = 50,
-                SeedRows = 28,
-                OccupancyColumns = 120,
+                SeedColumns = 40,
+                SeedRows = 40,
+                OccupancyColumns = 60,
                 OccupancyRows = 60,
                 StepSize = 0.0003,
                 MaxStepsPerDirection = 4000,
@@ -162,9 +173,9 @@ namespace TETMViewer
             YZspc.PlotTitle = $"Y(Z), E, x0 = {x0:F4}";
             YZspc.Options = new StreamplotOptions
             {
-                SeedColumns = 50,
-                SeedRows = 24,
-                OccupancyColumns = 120,
+                SeedColumns = 40,
+                SeedRows = 40,
+                OccupancyColumns = 60,
                 OccupancyRows = 60,
                 StepSize = 0.0003,
                 MaxStepsPerDirection = 4000,
@@ -189,12 +200,12 @@ namespace TETMViewer
             YXspc.Options = new StreamplotOptions
             {
                 SeedColumns = 40,
-                SeedRows = 20,
-                OccupancyColumns = 100,
-                OccupancyRows = 50,
+                SeedRows = 40,
+                OccupancyColumns = 60,
+                OccupancyRows = 60,
                 StepSize = 0.0002,
                 MaxStepsPerDirection = 3000,
-                MinLength = 0.001,
+                MinLength = 0.0015,
                 NormalizeField = true
             };
 
@@ -215,9 +226,9 @@ namespace TETMViewer
             ZXspc.PlotTitle = $"Z(X), H, y0 = {y0:F4}";
             ZXspc.Options = new StreamplotOptions
             {
-                SeedColumns = 50,
-                SeedRows = 28,
-                OccupancyColumns = 120,
+                SeedColumns = 40,
+                SeedRows = 40,
+                OccupancyColumns = 60,
                 OccupancyRows = 60,
                 StepSize = 0.0003,
                 MaxStepsPerDirection = 4000,
@@ -242,9 +253,9 @@ namespace TETMViewer
             YZspc.PlotTitle = $"Y(Z), E, x0 = {x0:F4}";
             YZspc.Options = new StreamplotOptions
             {
-                SeedColumns = 50,
-                SeedRows = 24,
-                OccupancyColumns = 120,
+                SeedColumns = 40,
+                SeedRows = 40,
+                OccupancyColumns = 60,
                 OccupancyRows = 60,
                 StepSize = 0.0003,
                 MaxStepsPerDirection = 4000,
@@ -267,6 +278,38 @@ namespace TETMViewer
             kc2 = kx * kx + ky * ky;
 
             crWaveFreqTextBox.Text = (1 / (2 * Math.PI * Math.Sqrt(mu0 * eps0)) * Math.Sqrt(kc2) / 1e6).ToString("F2");
+        }
+
+        System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+        private void startBtn_Click(object sender, EventArgs e)
+        {
+            startBtn.Enabled = false;
+            stopBtn.Enabled  = true;
+            timer.Interval = 1;
+            timer.Tick += Timer_Elapsed;
+            timer.Start();
+        }
+
+        private void stopBtn_Click(object sender, EventArgs e)
+        {
+            startBtn.Enabled = true;
+            stopBtn.Enabled  = false;
+            timer.Tick -= Timer_Elapsed;
+            timer.Stop();
+        }
+
+        private void Timer_Elapsed(object? sender, EventArgs e)
+        {
+            Calculate();
+        }
+
+        private void useTimeSimulCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            startBtn.Enabled = true;
+            stopBtn.Enabled = false;
+            timer.Tick -= Timer_Elapsed;
+            timer.Stop();
+            timeGroupBox.Visible = useTimeSimulCheckBox.Checked;
         }
     }
 }
