@@ -30,6 +30,18 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form));
             splitContainer = new SplitContainer();
+            groupBox3 = new GroupBox();
+            label20 = new Label();
+            label19 = new Label();
+            label18 = new Label();
+            label17 = new Label();
+            z0Slider = new TETMViewer.UI.DecimalSlider();
+            label16 = new Label();
+            y0Slider = new TETMViewer.UI.DecimalSlider();
+            x0Slider = new TETMViewer.UI.DecimalSlider();
+            label15 = new Label();
+            qualitySlider = new TETMViewer.UI.DecimalSlider();
+            label10 = new Label();
             timeGroupBox = new GroupBox();
             stopBtn = new Button();
             startBtn = new Button();
@@ -37,6 +49,8 @@
             label9 = new Label();
             useTimeSimulCheckBox = new CheckBox();
             groupBox2 = new GroupBox();
+            phaseTextBox = new TETMViewer.UI.NumericTextBox();
+            label8 = new Label();
             crWaveFreqTextBox = new TextBox();
             label13 = new Label();
             label14 = new Label();
@@ -69,6 +83,7 @@
             splitContainer.Panel1.SuspendLayout();
             splitContainer.Panel2.SuspendLayout();
             splitContainer.SuspendLayout();
+            groupBox3.SuspendLayout();
             timeGroupBox.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox1.SuspendLayout();
@@ -93,6 +108,8 @@
             // 
             // splitContainer.Panel1
             // 
+            splitContainer.Panel1.AutoScroll = true;
+            splitContainer.Panel1.Controls.Add(groupBox3);
             splitContainer.Panel1.Controls.Add(timeGroupBox);
             splitContainer.Panel1.Controls.Add(useTimeSimulCheckBox);
             splitContainer.Panel1.Controls.Add(groupBox2);
@@ -103,9 +120,164 @@
             // splitContainer.Panel2
             // 
             splitContainer.Panel2.Controls.Add(splitContainer1);
-            splitContainer.Size = new Size(1445, 746);
+            splitContainer.Size = new Size(1467, 875);
             splitContainer.SplitterDistance = 314;
             splitContainer.TabIndex = 1;
+            // 
+            // groupBox3
+            // 
+            groupBox3.Controls.Add(label20);
+            groupBox3.Controls.Add(label19);
+            groupBox3.Controls.Add(label18);
+            groupBox3.Controls.Add(label17);
+            groupBox3.Controls.Add(z0Slider);
+            groupBox3.Controls.Add(label16);
+            groupBox3.Controls.Add(y0Slider);
+            groupBox3.Controls.Add(x0Slider);
+            groupBox3.Controls.Add(label15);
+            groupBox3.Controls.Add(qualitySlider);
+            groupBox3.Controls.Add(label10);
+            groupBox3.Location = new Point(3, 626);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new Size(311, 208);
+            groupBox3.TabIndex = 18;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Построение";
+            // 
+            // label20
+            // 
+            label20.AutoSize = true;
+            label20.Location = new Point(281, 171);
+            label20.Name = "label20";
+            label20.Size = new Size(24, 18);
+            label20.TabIndex = 30;
+            label20.Text = "см";
+            // 
+            // label19
+            // 
+            label19.AutoSize = true;
+            label19.Location = new Point(281, 73);
+            label19.Name = "label19";
+            label19.Size = new Size(24, 18);
+            label19.TabIndex = 29;
+            label19.Text = "см";
+            // 
+            // label18
+            // 
+            label18.AutoSize = true;
+            label18.Location = new Point(281, 124);
+            label18.Name = "label18";
+            label18.Size = new Size(24, 18);
+            label18.TabIndex = 28;
+            label18.Text = "см";
+            // 
+            // label17
+            // 
+            label17.AutoSize = true;
+            label17.Location = new Point(38, 171);
+            label17.Name = "label17";
+            label17.Size = new Size(24, 18);
+            label17.TabIndex = 27;
+            label17.Text = "z0";
+            // 
+            // z0Slider
+            // 
+            z0Slider.BackColor = Color.Transparent;
+            z0Slider.FillColor = Color.DodgerBlue;
+            z0Slider.Location = new Point(68, 159);
+            z0Slider.Maximum = 2D;
+            z0Slider.Minimum = 1D;
+            z0Slider.Name = "z0Slider";
+            z0Slider.Size = new Size(208, 43);
+            z0Slider.Step = 0.01D;
+            z0Slider.TabIndex = 26;
+            z0Slider.ThumbBorderColor = Color.Gray;
+            z0Slider.ThumbColor = Color.White;
+            z0Slider.TickColor = Color.Gray;
+            z0Slider.TrackColor = Color.Silver;
+            z0Slider.Value = 1.5D;
+            z0Slider.ValueTextColor = Color.Black;
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Location = new Point(38, 124);
+            label16.Name = "label16";
+            label16.Size = new Size(24, 18);
+            label16.TabIndex = 25;
+            label16.Text = "y0";
+            // 
+            // y0Slider
+            // 
+            y0Slider.BackColor = Color.Transparent;
+            y0Slider.FillColor = Color.DodgerBlue;
+            y0Slider.Location = new Point(68, 109);
+            y0Slider.Maximum = 2D;
+            y0Slider.Minimum = 1D;
+            y0Slider.Name = "y0Slider";
+            y0Slider.Size = new Size(208, 43);
+            y0Slider.Step = 0.01D;
+            y0Slider.TabIndex = 24;
+            y0Slider.ThumbBorderColor = Color.Gray;
+            y0Slider.ThumbColor = Color.White;
+            y0Slider.TickColor = Color.Gray;
+            y0Slider.TrackColor = Color.Silver;
+            y0Slider.Value = 1.5D;
+            y0Slider.ValueTextColor = Color.Black;
+            // 
+            // x0Slider
+            // 
+            x0Slider.BackColor = Color.Transparent;
+            x0Slider.FillColor = Color.DodgerBlue;
+            x0Slider.Location = new Point(68, 60);
+            x0Slider.Maximum = 2D;
+            x0Slider.Minimum = 1D;
+            x0Slider.Name = "x0Slider";
+            x0Slider.Size = new Size(208, 43);
+            x0Slider.Step = 0.01D;
+            x0Slider.TabIndex = 23;
+            x0Slider.ThumbBorderColor = Color.Gray;
+            x0Slider.ThumbColor = Color.White;
+            x0Slider.TickColor = Color.Gray;
+            x0Slider.TrackColor = Color.Silver;
+            x0Slider.Value = 1.5D;
+            x0Slider.ValueTextColor = Color.Black;
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Location = new Point(38, 73);
+            label15.Name = "label15";
+            label15.Size = new Size(24, 18);
+            label15.TabIndex = 22;
+            label15.Text = "x0";
+            // 
+            // qualitySlider
+            // 
+            qualitySlider.BackColor = Color.Transparent;
+            qualitySlider.DecimalPlaces = 1;
+            qualitySlider.FillColor = Color.DodgerBlue;
+            qualitySlider.Location = new Point(68, 21);
+            qualitySlider.Maximum = 2D;
+            qualitySlider.Minimum = 1D;
+            qualitySlider.Name = "qualitySlider";
+            qualitySlider.Size = new Size(243, 43);
+            qualitySlider.TabIndex = 21;
+            qualitySlider.ThumbBorderColor = Color.Gray;
+            qualitySlider.ThumbColor = Color.White;
+            qualitySlider.TickColor = Color.Gray;
+            qualitySlider.TrackColor = Color.Silver;
+            qualitySlider.Value = 1.5D;
+            qualitySlider.ValueTextColor = Color.Black;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(6, 33);
+            label10.Name = "label10";
+            label10.Size = new Size(56, 18);
+            label10.TabIndex = 20;
+            label10.Text = "Кач-во";
             // 
             // timeGroupBox
             // 
@@ -113,13 +285,13 @@
             timeGroupBox.Controls.Add(startBtn);
             timeGroupBox.Controls.Add(stepTimeTextBox);
             timeGroupBox.Controls.Add(label9);
-            timeGroupBox.Location = new Point(3, 516);
+            timeGroupBox.Enabled = false;
+            timeGroupBox.Location = new Point(3, 540);
             timeGroupBox.Name = "timeGroupBox";
             timeGroupBox.Size = new Size(311, 85);
             timeGroupBox.TabIndex = 14;
             timeGroupBox.TabStop = false;
             timeGroupBox.Text = "Время";
-            timeGroupBox.Visible = false;
             // 
             // stopBtn
             // 
@@ -166,7 +338,7 @@
             // useTimeSimulCheckBox
             // 
             useTimeSimulCheckBox.AutoSize = true;
-            useTimeSimulCheckBox.Location = new Point(9, 488);
+            useTimeSimulCheckBox.Location = new Point(9, 520);
             useTimeSimulCheckBox.Name = "useTimeSimulCheckBox";
             useTimeSimulCheckBox.Size = new Size(174, 22);
             useTimeSimulCheckBox.TabIndex = 17;
@@ -176,6 +348,8 @@
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(phaseTextBox);
+            groupBox2.Controls.Add(label8);
             groupBox2.Controls.Add(crWaveFreqTextBox);
             groupBox2.Controls.Add(label13);
             groupBox2.Controls.Add(label14);
@@ -194,10 +368,31 @@
             groupBox2.Controls.Add(numMTextBox);
             groupBox2.Location = new Point(3, 297);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(311, 185);
+            groupBox2.Size = new Size(311, 217);
             groupBox2.TabIndex = 13;
             groupBox2.TabStop = false;
             groupBox2.Text = "Параметры волны";
+            // 
+            // phaseTextBox
+            // 
+            phaseTextBox.CheckIfEmpty = false;
+            phaseTextBox.Location = new Point(102, 184);
+            phaseTextBox.MaxLength = 8;
+            phaseTextBox.Name = "phaseTextBox";
+            phaseTextBox.Size = new Size(151, 25);
+            phaseTextBox.TabIndex = 19;
+            phaseTextBox.Text = "0";
+            phaseTextBox.TextAlign = HorizontalAlignment.Center;
+            phaseTextBox.ValueType = UI.NumericTextBox.NumericType.Double;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(8, 187);
+            label8.Name = "label8";
+            label8.Size = new Size(40, 18);
+            label8.TabIndex = 18;
+            label8.Text = "Фаза";
             // 
             // crWaveFreqTextBox
             // 
@@ -220,7 +415,7 @@
             // label14
             // 
             label14.AutoSize = true;
-            label14.Location = new Point(7, 153);
+            label14.Location = new Point(6, 153);
             label14.Name = "label14";
             label14.Size = new Size(96, 18);
             label14.TabIndex = 15;
@@ -430,9 +625,9 @@
             // 
             // calcBtn
             // 
-            calcBtn.Location = new Point(9, 602);
+            calcBtn.Location = new Point(3, 840);
             calcBtn.Name = "calcBtn";
-            calcBtn.Size = new Size(302, 32);
+            calcBtn.Size = new Size(308, 32);
             calcBtn.TabIndex = 0;
             calcBtn.Text = "Построить";
             calcBtn.UseVisualStyleBackColor = true;
@@ -451,8 +646,8 @@
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.Controls.Add(ZXspc);
-            splitContainer1.Size = new Size(1127, 746);
-            splitContainer1.SplitterDistance = 563;
+            splitContainer1.Size = new Size(1149, 875);
+            splitContainer1.SplitterDistance = 573;
             splitContainer1.TabIndex = 0;
             // 
             // splitContainer2
@@ -469,8 +664,8 @@
             // splitContainer2.Panel2
             // 
             splitContainer2.Panel2.Controls.Add(YZspc);
-            splitContainer2.Size = new Size(563, 746);
-            splitContainer2.SplitterDistance = 368;
+            splitContainer2.Size = new Size(573, 875);
+            splitContainer2.SplitterDistance = 430;
             splitContainer2.TabIndex = 0;
             // 
             // YXspc
@@ -483,7 +678,7 @@
             YXspc.Name = "YXspc";
             YXspc.PlotTitle = "Y(X)";
             YXspc.ShowArrows = true;
-            YXspc.Size = new Size(563, 368);
+            YXspc.Size = new Size(573, 430);
             YXspc.TabIndex = 1;
             YXspc.XLabel = "X";
             YXspc.YLabel = "Y";
@@ -498,7 +693,7 @@
             YZspc.Name = "YZspc";
             YZspc.PlotTitle = "Y(Z)";
             YZspc.ShowArrows = true;
-            YZspc.Size = new Size(563, 374);
+            YZspc.Size = new Size(573, 441);
             YZspc.TabIndex = 1;
             YZspc.XLabel = "Z";
             YZspc.YLabel = "Y";
@@ -513,7 +708,7 @@
             ZXspc.Name = "ZXspc";
             ZXspc.PlotTitle = "Z(X)";
             ZXspc.ShowArrows = true;
-            ZXspc.Size = new Size(560, 746);
+            ZXspc.Size = new Size(572, 875);
             ZXspc.TabIndex = 0;
             ZXspc.XLabel = "X";
             ZXspc.YLabel = "Z";
@@ -522,10 +717,9 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1445, 746);
+            ClientSize = new Size(1467, 875);
             Controls.Add(splitContainer);
             Font = new Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            MaximumSize = new Size(1463, 793);
             MinimumSize = new Size(1463, 793);
             Name = "Form";
             Text = "TE-TM Viewer";
@@ -534,6 +728,8 @@
             splitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer).EndInit();
             splitContainer.ResumeLayout(false);
+            groupBox3.ResumeLayout(false);
+            groupBox3.PerformLayout();
             timeGroupBox.ResumeLayout(false);
             timeGroupBox.PerformLayout();
             groupBox2.ResumeLayout(false);
@@ -593,5 +789,19 @@
         private CheckBox useTimeSimulCheckBox;
         private Button stopBtn;
         private Button startBtn;
+        private Label label8;
+        private UI.NumericTextBox phaseTextBox;
+        private GroupBox groupBox3;
+        private UI.DecimalSlider qualitySlider;
+        private Label label10;
+        private Label label17;
+        private UI.DecimalSlider z0Slider;
+        private Label label16;
+        private UI.DecimalSlider y0Slider;
+        private UI.DecimalSlider x0Slider;
+        private Label label15;
+        private Label label20;
+        private Label label19;
+        private Label label18;
     }
 }
