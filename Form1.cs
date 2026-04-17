@@ -53,43 +53,37 @@ namespace TETMViewer
             double beta2 = omega * omega * mu0 * eps0 - kc2;
             if (beta2 < 0)
             {
-                MessageBox.Show("Ìîäà íå ðàñïðîñòðàíÿåòñÿ!");
+                MessageBox.Show("ÐœÐ¾Ð´Ð° Ð½Ðµ Ñ€Ð°ÑÐ¿Ñ€Ð¾ÑÑ‚Ñ€Ð°Ð½ÑÐµÑ‚ÑÑ!");
                 return;
             }
             beta = Math.Sqrt(beta2);
 
             if (waveTypeCb.SelectedIndex == (int)WAVE_TYPES.TE && (m == 0 && n == 0))
             {
-                MessageBox.Show("Äëÿ TÅ-ìîäû íåëüçÿ, ÷òîáû m = n = 0.");
+                MessageBox.Show("Ð”Ð»Ñ TÐ•-Ð¼Ð¾Ð´Ñ‹ Ð½ÐµÐ»ÑŒÐ·Ñ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ m = n = 0.");
                 return;
             }
+
             if (waveTypeCb.SelectedIndex == (int)WAVE_TYPES.TM && (m == 0 || n == 0))
             {
-                MessageBox.Show("Äëÿ TM-ìîäû íóæíî m >= 1 è n >= 1.");
+                MessageBox.Show("Ð”Ð»Ñ TM-Ð¼Ð¾Ð´Ñ‹ Ð½ÑƒÐ¶Ð½Ð¾ m >= 1 Ð¸ n >= 1.");
                 return;
             }
 
             if (useTimeSimulCheckBox.Checked)
-            {
                 phase += double.Parse(stepTimeTextBox.Text);
-            }
+
             t = phase / omega;
 
-            //zMax = 2 * Math.PI / beta;
             zMax = 0.05;
             x0 = a / 1.8;
             y0 = b / 1.8;
-            //z0 = (phase + Math.PI / 2) / beta;
             z0 = 0.05;
 
             if (waveTypeCb.SelectedIndex == (int)WAVE_TYPES.TE)
-            {
                 BuildTePlots();
-            }
             else
-            {
                 BuildTmPlots();
-            }
         }
 
         private void BuildTePlots()
@@ -106,164 +100,143 @@ namespace TETMViewer
             BuildYZ_E_TM();
         }
 
+        private StreamplotOptions CreatePlanarOptions(bool dense = false)
+        {
+            return new StreamplotOptions
+            {
+                DensityX = dense ? 1.6 : 1.3,
+                DensityY = dense ? 1.6 : 1.3,
+                MinLengthAxes = 0.06,
+                MaxLengthAxes = 4.0,
+                IntegrationDirection = StreamIntegrationDirection.Both,
+                BrokenStreamlines = true,
+                IntegrationMaxStepScale = 1.0,
+                IntegrationMaxErrorScale = 1.0,
+                NumArrows = 1
+            };
+        }
+
+        private static StreamplotGrid SampleGrid(
+            RectD bounds,
+            int nx,
+            int ny,
+            Func<double, double, Vec2> field)
+        {
+            return StreamplotGrid.FromField(bounds, nx, ny, field);
+        }
+
+        private void SetPlot(
+            StreamPlotControl control,
+            string title,
+            StreamplotGrid grid,
+            StreamplotOptions options)
+        {
+            control.GridData = grid;
+            control.PlotTitle = title;
+            control.Options = options;
+            control.RefreshPlot();
+        }
+
         private void BuildXY_H_TM()
         {
-            YXspc.Field = (x, y) =>
-            {
-                double hx = omega * eps0 * ky / kc2 * E0 * Math.Sin(kx * x) * Math.Cos(ky * y) * Math.Sin(beta * z0 - omega * t);
-                double hy = -omega * eps0 * kx / kc2 * E0 * Math.Cos(kx * x) * Math.Sin(ky * y) * Math.Sin(beta * z0 - omega * t);
-                return new Vec2(hx, hy);
-            };
+            RectD bounds = new(0, a, 0, b);
+            StreamplotGrid grid = SampleGrid(
+                bounds,
+                nx: 160,
+                ny: 160,
+                field: (x, y) =>
+                {
+                    double hx = omega * eps0 * ky / kc2 * E0 * Math.Sin(kx * x) * Math.Cos(ky * y) * Math.Sin(beta * z0 - omega * t); 
+                    double hy = -omega * eps0 * kx / kc2 * E0 * Math.Cos(kx * x) * Math.Sin(ky * y) * Math.Sin(beta * z0 - omega * t);
+                    return new Vec2(hx, hy);
+                });
 
-            YXspc.Bounds = new RectD(0, a, 0, b);
-            YXspc.PlotTitle = $"Y(X), H, z0 = {z0:F4}";
-            YXspc.Options = new StreamplotOptions
-            {
-                SeedColumns = 40,
-                SeedRows = 40,
-                OccupancyColumns = 60,
-                OccupancyRows = 60,
-                StepSize = 0.0002,
-                MaxStepsPerDirection = 3000,
-                MinLength = 0.0015,
-                NormalizeField = true
-            };
-
-            YXspc.RefreshPlot();
+            SetPlot(YXspc, $"Y(X), H, z0 = {z0:F4}", grid, CreatePlanarOptions(dense: true));
         }
 
         private void BuildXZ_E_TM()
         {
-            ZXspc.Field = (x, z) =>
-            {
-                double ez = E0 * Math.Sin(kx * x) * Math.Sin(ky * y0) * Math.Cos(beta * z - omega * t);
-                double ex = -beta * kx / kc2 * E0 * Math.Cos(kx * x) * Math.Sin(ky * y0) * Math.Sin(beta * z - omega * t);
+            RectD bounds = new(0, a, 0, zMax);
+            StreamplotGrid grid = SampleGrid(
+                bounds,
+                nx: 180,
+                ny: 180,
+                field: (x, z) =>
+                {
+                    double ez = E0 * Math.Sin(kx * x) * Math.Sin(ky * y0) * Math.Cos(beta * z - omega * t);
+                    double ex = -beta * kx / kc2 * E0 * Math.Cos(kx * x) * Math.Sin(ky * y0) * Math.Sin(beta * z - omega * t);
+                    return new Vec2(-ex, ez);
+                });
 
-                return new Vec2(-ex, ez);
-            };
-
-            ZXspc.Bounds = new RectD(0, a, 0, zMax);
-            ZXspc.PlotTitle = $"Z(X), E, y0 = {y0:F4}";
-            ZXspc.Options = new StreamplotOptions
-            {
-                SeedColumns = 40,
-                SeedRows = 40,
-                OccupancyColumns = 60,
-                OccupancyRows = 60,
-                StepSize = 0.0003,
-                MaxStepsPerDirection = 4000,
-                MinLength = 0.0015,
-                NormalizeField = false
-            };
-
-            ZXspc.RefreshPlot();
+            SetPlot(ZXspc, $"Z(X), E, y0 = {y0:F4}", grid, CreatePlanarOptions());
         }
 
         private void BuildYZ_E_TM()
         {
-            YZspc.Field = (z, y) =>
-            {
-                double ez = E0 * Math.Sin(kx * x0) * Math.Sin(ky * y) * Math.Cos(beta * z - omega * t);
-                double ey = -beta * ky / kc2 * E0 * Math.Sin(kx * x0) * Math.Cos(ky * y) * Math.Sin(beta * z - omega * t);
+            RectD bounds = new(0, zMax, 0, b);
+            StreamplotGrid grid = SampleGrid(
+                bounds,
+                nx: 180,
+                ny: 180,
+                field: (z, y) =>
+                {
+                    double ez = E0 * Math.Sin(kx * x0) * Math.Sin(ky * y) * Math.Cos(beta * z - omega * t);
+                    double ey = -beta * ky / kc2 * E0 * Math.Sin(kx * x0) * Math.Cos(ky * y) * Math.Sin(beta * z - omega * t);
+                    return new Vec2(ez, ey);
+                });
 
-                return new Vec2(ez, ey);
-            };
-
-            YZspc.Bounds = new RectD(0, zMax, 0, b);
-            YZspc.PlotTitle = $"Y(Z), E, x0 = {x0:F4}";
-            YZspc.Options = new StreamplotOptions
-            {
-                SeedColumns = 40,
-                SeedRows = 40,
-                OccupancyColumns = 60,
-                OccupancyRows = 60,
-                StepSize = 0.0003,
-                MaxStepsPerDirection = 4000,
-                MinLength = 0.0015,
-                NormalizeField = true
-            };
-
-            YZspc.RefreshPlot();
+            SetPlot(YZspc, $"Y(Z), E, x0 = {x0:F4}", grid, CreatePlanarOptions());
         }
 
         private void BuildXY_E_TE()
         {
-            YXspc.Field = (x, y) =>
-            {
-                double ex = -omega * mu0 * ky / kc2 * H0 * Math.Cos(kx * x) * Math.Sin(ky * y) * Math.Sin(beta * z0 - omega * t);
-                double ey = omega * mu0 * kx / kc2 * H0 * Math.Sin(kx * x) * Math.Cos(ky * y) * Math.Sin(beta * z0 - omega * t);
-                return new Vec2(ex, ey);
-            };
+            RectD bounds = new(0, a, 0, b);
+            StreamplotGrid grid = SampleGrid(
+                bounds,
+                nx: 160,
+                ny: 160,
+                field: (x, y) =>
+                {
+                    double ex = -omega * mu0 * ky / kc2 * H0 * Math.Cos(kx * x) * Math.Sin(ky * y) * Math.Sin(beta * z0 - omega * t);
+                    double ey = omega * mu0 * kx / kc2 * H0 * Math.Sin(kx * x) * Math.Cos(ky * y) * Math.Sin(beta * z0 - omega * t);
+                    return new Vec2(ex, ey);
+                });
 
-            YXspc.Bounds = new RectD(0, a, 0, b);
-            YXspc.PlotTitle = $"Y(X), E, z0 = {z0:F4}";
-            YXspc.Options = new StreamplotOptions
-            {
-                SeedColumns = 40,
-                SeedRows = 40,
-                OccupancyColumns = 60,
-                OccupancyRows = 60,
-                StepSize = 0.0002,
-                MaxStepsPerDirection = 3000,
-                MinLength = 0.0015,
-                NormalizeField = true
-            };
-
-            YXspc.RefreshPlot();
+            SetPlot(YXspc, $"Y(X), E, z0 = {z0:F4}", grid, CreatePlanarOptions(dense: true));
         }
 
         private void BuildXZ_H_TE()
         {
-            ZXspc.Field = (x, z) =>
-            {
-                double hz = H0 * Math.Cos(kx * x) * Math.Cos(ky * y0) * Math.Cos(beta * z - omega * t);
-                double hx = -beta * kx / kc2 * H0 * Math.Sin(kx * x) * Math.Cos(ky * y0) * Math.Sin(beta * z - omega * t);
+            RectD bounds = new(0, a, 0, zMax);
+            StreamplotGrid grid = SampleGrid(
+                bounds,
+                nx: 180,
+                ny: 180,
+                field: (x, z) =>
+                {
+                    double hz = H0 * Math.Cos(kx * x) * Math.Cos(ky * y0) * Math.Cos(beta * z - omega * t);
+                    double hx = -beta * kx / kc2 * H0 * Math.Sin(kx * x) * Math.Cos(ky * y0) * Math.Sin(beta * z - omega * t);
+                    return new Vec2(-hx, hz);
+                });
 
-                return new Vec2(-hx, hz);
-            };
-
-            ZXspc.Bounds = new RectD(0, a, 0, zMax);
-            ZXspc.PlotTitle = $"Z(X), H, y0 = {y0:F4}";
-            ZXspc.Options = new StreamplotOptions
-            {
-                SeedColumns = 40,
-                SeedRows = 40,
-                OccupancyColumns = 60,
-                OccupancyRows = 60,
-                StepSize = 0.0003,
-                MaxStepsPerDirection = 4000,
-                MinLength = 0.0015,
-                NormalizeField = false
-            };
-
-            ZXspc.RefreshPlot();
+            SetPlot(ZXspc, $"Z(X), H, y0 = {y0:F4}", grid, CreatePlanarOptions());
         }
 
         private void BuildYZ_E_TE()
         {
-            YZspc.Field = (z, y) =>
-            {
-                double ez = 0.0;
-                double ey = omega * mu0 * kx / kc2 * H0 * Math.Sin(kx * x0) * Math.Cos(ky * y) * Math.Sin(beta * z - omega * t);
+            RectD bounds = new(0, zMax, 0, b);
+            StreamplotGrid grid = SampleGrid(
+                bounds,
+                nx: 180,
+                ny: 180,
+                field: (z, y) =>
+                {
+                    double ez = 0.0;
+                    double ey = omega * mu0 * kx / kc2 * H0 * Math.Sin(kx * x0) * Math.Cos(ky * y) * Math.Sin(beta * z - omega * t);
+                    return new Vec2(ez, ey);
+                });
 
-                return new Vec2(ez, ey);
-            };
-
-            YZspc.Bounds = new RectD(0, zMax, 0, b);
-            YZspc.PlotTitle = $"Y(Z), E, x0 = {x0:F4}";
-            YZspc.Options = new StreamplotOptions
-            {
-                SeedColumns = 40,
-                SeedRows = 40,
-                OccupancyColumns = 60,
-                OccupancyRows = 60,
-                StepSize = 0.0003,
-                MaxStepsPerDirection = 4000,
-                MinLength = 0.0015,
-                NormalizeField = true
-            };
-
-            YZspc.RefreshPlot();
+            SetPlot(YZspc, $"Y(Z), E, x0 = {x0:F4}", grid, CreatePlanarOptions());
         }
 
         private void numABMNTextBox_TextChanged(object sender, EventArgs e)
@@ -281,10 +254,11 @@ namespace TETMViewer
         }
 
         System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+
         private void startBtn_Click(object sender, EventArgs e)
         {
             startBtn.Enabled = false;
-            stopBtn.Enabled  = true;
+            stopBtn.Enabled = true;
             timer.Interval = 1;
             timer.Tick += Timer_Elapsed;
             timer.Start();
@@ -293,7 +267,7 @@ namespace TETMViewer
         private void stopBtn_Click(object sender, EventArgs e)
         {
             startBtn.Enabled = true;
-            stopBtn.Enabled  = false;
+            stopBtn.Enabled = false;
             timer.Tick -= Timer_Elapsed;
             timer.Stop();
         }
