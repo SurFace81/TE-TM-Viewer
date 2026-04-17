@@ -720,7 +720,7 @@
             ClientSize = new Size(1467, 875);
             Controls.Add(splitContainer);
             Font = new Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            MinimumSize = new Size(1463, 793);
+            MinimumSize = new Size(1485, 922);
             Name = "Form";
             Text = "TE-TM Viewer";
             splitContainer.Panel1.ResumeLayout(false);
