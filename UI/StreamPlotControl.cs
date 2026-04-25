@@ -161,6 +161,27 @@ public sealed class StreamPlotControl : UserControl
             }
         }
 
+        plot.Axes.Rules.Clear();
+
+        var limits = new AxisLimits(
+            bounds.XMin,
+            bounds.XMax,
+            bounds.YMin,
+            bounds.YMax);
+
+        plot.Axes.Rules.Add(
+            new ScottPlot.AxisRules.MaximumBoundary(
+                plot.Axes.Bottom,
+                plot.Axes.Left,
+                limits));
+
+        plot.Axes.Rules.Add(
+            new ScottPlot.AxisRules.MaximumSpan(
+                plot.Axes.Bottom,
+                plot.Axes.Left,
+                bounds.Width,
+                bounds.Height));
+
         plot.Axes.SetLimits(bounds.XMin, bounds.XMax, bounds.YMin, bounds.YMax);
         formsPlot.Refresh();
     }

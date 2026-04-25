@@ -57,10 +57,6 @@
             label12 = new Label();
             waveFreqTextBox = new TETMViewer.UI.NumericTextBox();
             label11 = new Label();
-            ampETextBox = new TETMViewer.UI.NumericTextBox();
-            ampHTextBox = new TETMViewer.UI.NumericTextBox();
-            label6 = new Label();
-            label7 = new Label();
             label1 = new Label();
             waveTypeCb = new ComboBox();
             numNTextBox = new TETMViewer.UI.NumericTextBox();
@@ -120,7 +116,7 @@
             // splitContainer.Panel2
             // 
             splitContainer.Panel2.Controls.Add(splitContainer1);
-            splitContainer.Size = new Size(1467, 875);
+            splitContainer.Size = new Size(1467, 851);
             splitContainer.SplitterDistance = 314;
             splitContainer.TabIndex = 1;
             // 
@@ -137,7 +133,7 @@
             groupBox3.Controls.Add(label15);
             groupBox3.Controls.Add(qualitySlider);
             groupBox3.Controls.Add(label10);
-            groupBox3.Location = new Point(3, 626);
+            groupBox3.Location = new Point(3, 596);
             groupBox3.Name = "groupBox3";
             groupBox3.Size = new Size(311, 208);
             groupBox3.TabIndex = 18;
@@ -286,7 +282,7 @@
             timeGroupBox.Controls.Add(stepTimeTextBox);
             timeGroupBox.Controls.Add(label9);
             timeGroupBox.Enabled = false;
-            timeGroupBox.Location = new Point(3, 540);
+            timeGroupBox.Location = new Point(3, 505);
             timeGroupBox.Name = "timeGroupBox";
             timeGroupBox.Size = new Size(311, 85);
             timeGroupBox.TabIndex = 14;
@@ -338,7 +334,7 @@
             // useTimeSimulCheckBox
             // 
             useTimeSimulCheckBox.AutoSize = true;
-            useTimeSimulCheckBox.Location = new Point(9, 520);
+            useTimeSimulCheckBox.Location = new Point(9, 477);
             useTimeSimulCheckBox.Name = "useTimeSimulCheckBox";
             useTimeSimulCheckBox.Size = new Size(174, 22);
             useTimeSimulCheckBox.TabIndex = 17;
@@ -356,10 +352,6 @@
             groupBox2.Controls.Add(label12);
             groupBox2.Controls.Add(waveFreqTextBox);
             groupBox2.Controls.Add(label11);
-            groupBox2.Controls.Add(ampETextBox);
-            groupBox2.Controls.Add(ampHTextBox);
-            groupBox2.Controls.Add(label6);
-            groupBox2.Controls.Add(label7);
             groupBox2.Controls.Add(label1);
             groupBox2.Controls.Add(waveTypeCb);
             groupBox2.Controls.Add(numNTextBox);
@@ -368,7 +360,7 @@
             groupBox2.Controls.Add(numMTextBox);
             groupBox2.Location = new Point(3, 297);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(311, 217);
+            groupBox2.Size = new Size(311, 174);
             groupBox2.TabIndex = 13;
             groupBox2.TabStop = false;
             groupBox2.Text = "Параметры волны";
@@ -376,7 +368,7 @@
             // phaseTextBox
             // 
             phaseTextBox.CheckIfEmpty = false;
-            phaseTextBox.Location = new Point(102, 184);
+            phaseTextBox.Location = new Point(102, 144);
             phaseTextBox.MaxLength = 8;
             phaseTextBox.Name = "phaseTextBox";
             phaseTextBox.Size = new Size(151, 25);
@@ -388,7 +380,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(8, 187);
+            label8.Location = new Point(8, 147);
             label8.Name = "label8";
             label8.Size = new Size(40, 18);
             label8.TabIndex = 18;
@@ -396,7 +388,7 @@
             // 
             // crWaveFreqTextBox
             // 
-            crWaveFreqTextBox.Location = new Point(102, 150);
+            crWaveFreqTextBox.Location = new Point(102, 110);
             crWaveFreqTextBox.Name = "crWaveFreqTextBox";
             crWaveFreqTextBox.ReadOnly = true;
             crWaveFreqTextBox.Size = new Size(151, 25);
@@ -406,7 +398,7 @@
             // label13
             // 
             label13.AutoSize = true;
-            label13.Location = new Point(259, 153);
+            label13.Location = new Point(259, 113);
             label13.Name = "label13";
             label13.Size = new Size(32, 18);
             label13.TabIndex = 17;
@@ -415,7 +407,7 @@
             // label14
             // 
             label14.AutoSize = true;
-            label14.Location = new Point(6, 153);
+            label14.Location = new Point(6, 113);
             label14.Name = "label14";
             label14.Size = new Size(96, 18);
             label14.TabIndex = 15;
@@ -424,7 +416,7 @@
             // label12
             // 
             label12.AutoSize = true;
-            label12.Location = new Point(259, 124);
+            label12.Location = new Point(259, 84);
             label12.Name = "label12";
             label12.Size = new Size(32, 18);
             label12.TabIndex = 14;
@@ -433,7 +425,7 @@
             // waveFreqTextBox
             // 
             waveFreqTextBox.CheckIfEmpty = false;
-            waveFreqTextBox.Location = new Point(102, 121);
+            waveFreqTextBox.Location = new Point(102, 81);
             waveFreqTextBox.MaxLength = 8;
             waveFreqTextBox.Name = "waveFreqTextBox";
             waveFreqTextBox.Size = new Size(151, 25);
@@ -445,53 +437,11 @@
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(6, 124);
+            label11.Location = new Point(6, 84);
             label11.Name = "label11";
             label11.Size = new Size(64, 18);
             label11.TabIndex = 12;
             label11.Text = "Частота";
-            // 
-            // ampETextBox
-            // 
-            ampETextBox.CheckIfEmpty = false;
-            ampETextBox.Location = new Point(55, 86);
-            ampETextBox.MaxLength = 5;
-            ampETextBox.Name = "ampETextBox";
-            ampETextBox.Size = new Size(69, 25);
-            ampETextBox.TabIndex = 9;
-            ampETextBox.Text = "1";
-            ampETextBox.TextAlign = HorizontalAlignment.Center;
-            ampETextBox.ValueType = UI.NumericTextBox.NumericType.Double;
-            // 
-            // ampHTextBox
-            // 
-            ampHTextBox.CheckIfEmpty = false;
-            ampHTextBox.Location = new Point(185, 86);
-            ampHTextBox.MaxLength = 5;
-            ampHTextBox.Name = "ampHTextBox";
-            ampHTextBox.Size = new Size(69, 25);
-            ampHTextBox.TabIndex = 11;
-            ampHTextBox.Text = "1";
-            ampHTextBox.TextAlign = HorizontalAlignment.Center;
-            ampHTextBox.ValueType = UI.NumericTextBox.NumericType.Double;
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(6, 89);
-            label6.Name = "label6";
-            label6.Size = new Size(56, 18);
-            label6.TabIndex = 8;
-            label6.Text = "E_0 = ";
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Location = new Point(139, 89);
-            label7.Name = "label7";
-            label7.Size = new Size(56, 18);
-            label7.TabIndex = 10;
-            label7.Text = "H_0 = ";
             // 
             // label1
             // 
@@ -625,7 +575,7 @@
             // 
             // calcBtn
             // 
-            calcBtn.Location = new Point(3, 840);
+            calcBtn.Location = new Point(3, 810);
             calcBtn.Name = "calcBtn";
             calcBtn.Size = new Size(308, 32);
             calcBtn.TabIndex = 0;
@@ -646,7 +596,7 @@
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.Controls.Add(ZXspc);
-            splitContainer1.Size = new Size(1149, 875);
+            splitContainer1.Size = new Size(1149, 851);
             splitContainer1.SplitterDistance = 573;
             splitContainer1.TabIndex = 0;
             // 
@@ -664,8 +614,8 @@
             // splitContainer2.Panel2
             // 
             splitContainer2.Panel2.Controls.Add(YZspc);
-            splitContainer2.Size = new Size(573, 875);
-            splitContainer2.SplitterDistance = 430;
+            splitContainer2.Size = new Size(573, 851);
+            splitContainer2.SplitterDistance = 418;
             splitContainer2.TabIndex = 0;
             // 
             // YXspc
@@ -678,7 +628,7 @@
             YXspc.Name = "YXspc";
             YXspc.PlotTitle = "Y(X)";
             YXspc.ShowArrows = true;
-            YXspc.Size = new Size(573, 430);
+            YXspc.Size = new Size(573, 418);
             YXspc.TabIndex = 1;
             YXspc.XLabel = "X";
             YXspc.YLabel = "Y";
@@ -693,7 +643,7 @@
             YZspc.Name = "YZspc";
             YZspc.PlotTitle = "Y(Z)";
             YZspc.ShowArrows = true;
-            YZspc.Size = new Size(573, 441);
+            YZspc.Size = new Size(573, 429);
             YZspc.TabIndex = 1;
             YZspc.XLabel = "Z";
             YZspc.YLabel = "Y";
@@ -708,7 +658,7 @@
             ZXspc.Name = "ZXspc";
             ZXspc.PlotTitle = "Z(X)";
             ZXspc.ShowArrows = true;
-            ZXspc.Size = new Size(572, 875);
+            ZXspc.Size = new Size(572, 851);
             ZXspc.TabIndex = 0;
             ZXspc.XLabel = "X";
             ZXspc.YLabel = "Z";
@@ -717,10 +667,10 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1467, 875);
+            ClientSize = new Size(1467, 851);
             Controls.Add(splitContainer);
             Font = new Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            MinimumSize = new Size(1485, 922);
+            MinimumSize = new Size(1485, 898);
             Name = "Form";
             Text = "TE-TM Viewer";
             splitContainer.Panel1.ResumeLayout(false);
@@ -770,10 +720,6 @@
         private UI.NumericTextBox stepTimeTextBox;
         private Label label9;
         private GroupBox groupBox2;
-        private UI.NumericTextBox ampETextBox;
-        private UI.NumericTextBox ampHTextBox;
-        private Label label6;
-        private Label label7;
         private SplitContainer splitContainer1;
         private SplitContainer splitContainer2;
         private StreamPlotControl streamPlotControl4;
